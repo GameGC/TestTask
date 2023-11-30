@@ -46,16 +46,21 @@ public class PointClickFeature : BaseMoveFeature
 
         var velocity = m_NavMeshAgent.velocity.normalized;
         var moveInput = new Vector2(velocity.x,velocity.z);
-        var director = Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination) * new Vector3(moveInput.x,0,moveInput.y);
+
+        //just for ignoring stupid logs
+        var lookRotation = m_NavMeshAgent.isStopped ? Quaternion.identity
+            : Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination);
+        
+        var direction =  lookRotation * new Vector3(moveInput.x,0,moveInput.y);
         // update position
         
         SetControllerMoveSpeed(Variables.MovementSmooth, in dt);
-        MoveCharacter(Variables.IsSlopeBadForMove, director);
+        MoveCharacter(Variables.IsSlopeBadForMove, direction);
 
         // update rotation
 
         if (moveInput != Vector2.zero && !m_NavMeshAgent.isStopped) 
-            RotateToDirection(director, in dt);
+            RotateToDirection(direction, in dt);
         
         //update animation
         UpdateAnimation(Variables.IsSlopeBadForMove,moveInput.magnitude);

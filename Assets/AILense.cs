@@ -36,8 +36,6 @@ public class AILense : MonoBehaviour
             }
         }
 
-        Debug.Log($"{name} {m_Target != null}");
-
         if (m_Target)
         {
             m_Agent.SetDestination(m_Target.position);
