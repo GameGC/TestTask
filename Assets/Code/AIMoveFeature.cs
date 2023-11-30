@@ -20,19 +20,23 @@ public class AIMoveFeature : BaseMoveFeature
 
 
         var velocity = m_NavMeshAgent.velocity.normalized;
-        var moveDirection = new Vector2(velocity.x,velocity.z);
+        var moveInput = new Vector2(velocity.x,velocity.z);
         // update position
         
         SetControllerMoveSpeed(Variables.MovementSmooth, in dt);
-        MoveCharacter(Variables.IsSlopeBadForMove, moveDirection);
 
         // update rotation
         
-        if (moveDirection != Vector2.zero) 
-            RotateToDirection(moveDirection, in dt);
+        if (moveInput != Vector2.zero && !m_NavMeshAgent.isStopped)
+        {
+            var lookRotation = Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination);
+            
+            var direction =  lookRotation * new Vector3(moveInput.x,0,moveInput.y);
+            RotateToDirection(direction, in dt);
+        }
         
         //update animation
-        UpdateAnimation(Variables.IsSlopeBadForMove,moveDirection.magnitude);
+        UpdateAnimation(Variables.IsSlopeBadForMove,moveInput.magnitude);
     }
     
     public override void SetControllerMoveSpeed(float movementSmooth, in float dt)

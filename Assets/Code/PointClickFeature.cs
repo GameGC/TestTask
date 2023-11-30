@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using ThirdPersonController.Core;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.MovementStateMachine.Features.Move;
 using UnityEngine;
@@ -47,21 +43,24 @@ public class PointClickFeature : BaseMoveFeature
         var velocity = m_NavMeshAgent.velocity.normalized;
         var moveInput = new Vector2(velocity.x,velocity.z);
 
-        //just for ignoring stupid logs
-        var lookRotation = m_NavMeshAgent.isStopped ? Quaternion.identity
-            : Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination);
+      
         
-        var direction =  lookRotation * new Vector3(moveInput.x,0,moveInput.y);
+       
         // update position
         
         SetControllerMoveSpeed(Variables.MovementSmooth, in dt);
-        MoveCharacter(Variables.IsSlopeBadForMove, direction);
+        //MoveCharacter(Variables.IsSlopeBadForMove, direction);
 
         // update rotation
 
-        if (moveInput != Vector2.zero && !m_NavMeshAgent.isStopped) 
+        if (moveInput != Vector2.zero && !m_NavMeshAgent.isStopped)
+        {
+            var lookRotation = Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination);
+            
+            var direction =  lookRotation * new Vector3(moveInput.x,0,moveInput.y);
             RotateToDirection(direction, in dt);
-        
+        }
+
         //update animation
         UpdateAnimation(Variables.IsSlopeBadForMove,moveInput.magnitude);
     }

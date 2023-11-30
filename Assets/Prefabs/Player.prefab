@@ -782,6 +782,8 @@ GameObject:
   - component: {fileID: 3846284213736497260}
   - component: {fileID: 3846284213736497263}
   - component: {fileID: 2527007566189643829}
+  - component: {fileID: 1617079116256188314}
+  - component: {fileID: 1617079116256188315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -887,7 +889,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.27
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -899,6 +901,30 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1617079116256188314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3846284213736497248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4ebceb861c34bbeb2817a785260de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1617079116256188315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3846284213736497248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e4b7cf25454c6e8c5cbb05793007da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3846284213764078543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,7 +3124,6 @@ MonoBehaviour:
   - Name: Move
     features:
     - rid: 8563616750158479565
-    - rid: 8563616750158479572
     - rid: 8271788300824739840
     Transitions:
     - rid: 8563616750158479575
@@ -3135,7 +3160,7 @@ MonoBehaviour:
     - rid: 8271788300824739840
       type: {class: PointClickFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[0].features.Array.data[2]
+        path: states.Array.data[0].features.Array.data[1]
         animationSmooth: 0.2
         rotationSpeed: 16
         runningSpeed: 4
@@ -3166,16 +3191,6 @@ MonoBehaviour:
       data:
         path: 
         slopeLimit: 45
-    - rid: 8563616750158479572
-      type: {class: FootStepFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
-      data:
-        path: states.Array.data[0].features.Array.data[1]
-        startOffsetX: -0.05
-        RaycastOriginY: 0.4
-        RaycastEndY: -0.4
-        startOffsetY: -0.08
-        stepLength: 0.18
-        smoothTime: 300
     - rid: 8563616750158479573
       type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:

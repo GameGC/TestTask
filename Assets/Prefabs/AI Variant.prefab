@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497248, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497249, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: cameraTransform
@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497262, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497262, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: m_LocalRotation.y
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497262, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3846284213736497262, guid: 06cc84adda8404fa2b4fd12db25ce2c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
