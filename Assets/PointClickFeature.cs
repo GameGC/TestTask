@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ThirdPersonController.Core;
@@ -24,32 +25,40 @@ public class PointClickFeature : BaseMoveFeature
         {
             if (Physics.Raycast(m_Camera.ScreenPointToRay(Mouse.current.position.value),out  var hit))
             {
-                m_NavMeshAgent.SetDestination(hit.point);
+                m_NavMeshAgent.isStopped = false;
+                m_NavMeshAgent.SetDestination(hit.point + hit.normal *0.01f);
             }
+        }
+
+        if(m_NavMeshAgent.isStopped) return;
+        var dest = m_NavMeshAgent.destination;
+        var pos = _transform.position;
+        if (Vector2.Distance(new Vector2(dest.x, dest.z), new Vector2(pos.x, pos.z)) < m_NavMeshAgent.stoppingDistance)
+        {
+            m_NavMeshAgent.isStopped = true;
         }
     }
   
     public override void OnFixedUpdateState()
     {
-        if (m_NavMeshAgent.isStopped) return;
-      
         float dt = Time.fixedDeltaTime;
 
 
         var velocity = m_NavMeshAgent.velocity.normalized;
-        var moveDirection = new Vector2(velocity.x,velocity.z);
+        var moveInput = new Vector2(velocity.x,velocity.z);
+        var director = Quaternion.LookRotation(_transform.position - m_NavMeshAgent.destination) * new Vector3(moveInput.x,0,moveInput.y);
         // update position
         
         SetControllerMoveSpeed(Variables.MovementSmooth, in dt);
-        MoveCharacter(Variables.IsSlopeBadForMove, moveDirection);
+        MoveCharacter(Variables.IsSlopeBadForMove, director);
 
         // update rotation
-        
-        if (moveDirection != Vector2.zero) 
-            RotateToDirection(moveDirection, in dt);
+
+        if (moveInput != Vector2.zero && !m_NavMeshAgent.isStopped) 
+            RotateToDirection(director, in dt);
         
         //update animation
-        UpdateAnimation(Variables.IsSlopeBadForMove,moveDirection.magnitude);
+        UpdateAnimation(Variables.IsSlopeBadForMove,moveInput.magnitude);
     }
     
     public override void SetControllerMoveSpeed(float movementSmooth, in float dt)

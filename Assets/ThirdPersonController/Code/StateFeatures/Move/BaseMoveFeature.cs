@@ -23,7 +23,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         
         private Animator _animator;
         private Rigidbody _rigidbody;
-        private Transform _transform;
+        protected Transform _transform;
 
 
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
