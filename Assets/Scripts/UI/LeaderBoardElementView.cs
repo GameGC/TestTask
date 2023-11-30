@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
+using UI;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LeaderBoardElementView : BaseView<KeyValuePair<string,int>>
 {
-    public Text nameText;
-    public Text scoreText;
+    [SerializeField] private Text nameText;
+    [SerializeField] private Text scoreText;
     
     public override void SetModel(KeyValuePair<string, int> model)
     {

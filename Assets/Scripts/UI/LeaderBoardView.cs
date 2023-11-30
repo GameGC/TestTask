@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 public class LeaderBoardView : BaseView<KeyValuePair<string, int>[]>
